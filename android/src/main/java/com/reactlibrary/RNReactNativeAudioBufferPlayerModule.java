@@ -38,9 +38,14 @@ public class RNReactNativeAudioBufferPlayerModule extends ReactContextBaseJavaMo
   }
 
   @ReactMethod
-  public void playAudioBuffer(byte[] buffer, int bufferSize, Promise promise){
+  public void playAudioBuffer(ReadableArray buffer, int bufferSize, Promise promise){
+    byte[] toWrite = new byte[bufferSize];
+    for(int i = 0; i < bufferSize; i++)
+    {
+      toWrite[i] = (byte)buffer.getInt(i);
+    }
     try{
-      track.write(buffer, 0, bufferSize);
+      track.write(toWrite, 0, bufferSize);
       promise.resolve(true);
     } catch (Exception e){
       promise.reject("Play audio buffer error.", e);
