@@ -12,13 +12,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableArray;
 
-//For debug
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-
 public class RNReactNativeAudioBufferPlayerModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
@@ -45,14 +38,6 @@ public class RNReactNativeAudioBufferPlayerModule extends ReactContextBaseJavaMo
     }
   }
 
-  public void writeToFile(byte[] toWrite) throws IOException {
-    File myFile = new File("/data/tmp.wav");
-    try{
-      output = new OutputStreamWriter(new FileOutputStream(myFile));
-      output.write(toWrite);
-    } catch(IOException ignored){}
-  }
-
   @ReactMethod
   public void playAudioBuffer(ReadableArray buffer, int bufferSize, Promise promise){
     byte[] toWrite = new byte[bufferSize];
@@ -62,9 +47,6 @@ public class RNReactNativeAudioBufferPlayerModule extends ReactContextBaseJavaMo
     }
     try{
       track.write(toWrite, 0, bufferSize);
-      //For debug
-      writeToFile(toWrite);
-
       promise.resolve(true);
     } catch (Exception e){
       promise.reject("Play audio buffer error.", e);
