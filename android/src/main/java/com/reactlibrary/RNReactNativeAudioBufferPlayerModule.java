@@ -30,7 +30,7 @@ public class RNReactNativeAudioBufferPlayerModule extends ReactContextBaseJavaMo
   @ReactMethod
   public void initialize(int hz, Promise promise){
     try{
-      track = new AudioTrack(AudioManager.STREAM_MUSIC, hz, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT, 3200*100, AudioTrack.MODE_STREAM);
+      track = new AudioTrack(AudioManager.STREAM_MUSIC, hz, AudioFormat.CHANNEL_CONFIGURATION_MONO, AudioFormat.ENCODING_PCM_16BIT, 3200, AudioTrack.MODE_STREAM);
       track.play();
       promise.resolve(true);
     } catch (Exception e){
