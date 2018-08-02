@@ -43,7 +43,7 @@ public class RNReactNativeAudioBufferPlayerModule extends ReactContextBaseJavaMo
     byte[] toWrite = new byte[bufferSize];
     for(int i = 0; i < bufferSize; i++)
     {
-      toWrite[i] = (byte)buffer.getInt(i);
+      toWrite[i] = (byte)(buffer.getInt(i));
     }
     try{
       track.write(toWrite, 0, bufferSize);
