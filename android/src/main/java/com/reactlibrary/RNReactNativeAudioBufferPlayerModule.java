@@ -11,6 +11,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 
 public class RNReactNativeAudioBufferPlayerModule extends ReactContextBaseJavaModule {
 
@@ -39,7 +40,8 @@ public class RNReactNativeAudioBufferPlayerModule extends ReactContextBaseJavaMo
   }
 
   @ReactMethod
-  public void playAudioBuffer(ReadableArray buffer, int bufferSize, Promise promise){
+  public void playAudioBuffer(ReadableMap bufferMap, int bufferSize, Promise promise){
+    ReadableArray buffer = bufferMap.getArray("buffer");
     byte[] toWrite = new byte[bufferSize];
     for(int i = 0; i < bufferSize; i++)
     {
